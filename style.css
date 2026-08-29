@@ -271,13 +271,25 @@ nav ul li.active a::after {
     font-size: 13px;
     white-space: nowrap;
 }
-.menu-btn{
-display:flex;
-align-items:center;
-justify-content:center;
-line-height:1;
-padding:0;
-box-sizing:border-box;
+.menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.menu-btn:hover {
+    background: var(--primary, #f26b21);
+    border-color: var(--primary, #f26b21);
+    color: #ffffff;
 }
     
     /* محاذاة الأيقونة بالوسط تماماً */
