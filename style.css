@@ -152,107 +152,225 @@ transition:.08s;
 }
 
 /*==============================
-Header
+Header Responsive Styling
 ==============================*/
-header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-z-index:999;
-padding:18px 0;
-transition:.4s;
-height:90px;
-background:#111316;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  z-index: 999;
+  background: #111316;
+  display: flex;
+  align-items: center;
+  transition: background 0.4s ease, height 0.3s ease, box-shadow 0.4s ease;
 }
 
-header.active{
-background:rgba(8,12,20,.88);
-backdrop-filter:blur(18px);
-box-shadow:0 10px 35px rgba(0,0,0,.18);
-}
-header .container{
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-.logo{
-display:flex;
-align-items:center;
-gap:12px;
-flex-direction:row-reverse;
+header.active {
+  background: rgba(8, 12, 20, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.logo img{
-width:75px;
-height:75px;
-object-fit:contain;
-flex-shrink:0;
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 92%;
+  max-width: 1320px;
+  margin: 0 auto;
 }
 
-.logo-text{
-display:flex;
-flex-direction:column;
-align-items:flex-end;
-line-height:1.05;
-text-align:right;
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: row-reverse;
+  text-decoration: none;
 }
 
-.logo-text span{
-font-size:19px;
-font-weight:900;
-color:#fff;
-white-space:nowrap;
+.logo img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
-nav ul{
-display:flex;
-align-items:center;
-gap:55px;
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.1;
+  text-align: right;
 }
-nav ul li a{
-font-size:16px;
-font-weight:700;
-color:#fff;
-position:relative;
-transition:.3s;
+
+.logo-text span {
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  white-space: nowrap;
 }
-nav ul li a::after{
-content:"";
-position:absolute;
-right:0;
-bottom:-8px;
-width:0;
-height:2px;
-background:var(--secondary);
-transition:.3s;
+
+/* Navigation Links */
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+nav ul li a {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  position: relative;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--primary, #f26b21);
+  transition: width 0.3s ease;
+}
+
 nav ul li:hover a::after,
-nav ul .active a::after{
-width:100%;
+nav ul li.active a::after {
+  width: 100%;
 }
 
-.cart-btn{
-width:52px;
-height:52px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:rgba(255,255,255,.08);
-color:#fff;
-font-size:18px;
-transition:.3s;
-}
-.cart-btn:hover{
-background:var(--primary);
-}
-.menu-btn{
-display:none;
-font-size:26px;
-color:#fff;
-cursor:pointer;
+/* Header Action Buttons */
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
+.header-buttons .main-btn {
+  padding: 12px 30px;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.3s ease;
+}
+
+.menu-btn:hover {
+  background: var(--primary, #f26b21);
+}
+
+/*==============================
+Responsive Breakpoints
+==============================*/
+
+/* الشاشات المتوسطة والكبيرة (1024px فما دون) */
+@media (max-width: 1024px) {
+  nav ul {
+    gap: 18px;
+  }
+  
+  nav ul li a {
+    font-size: 14px;
+  }
+
+  .logo img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .logo-text span {
+    font-size: 16px;
+  }
+}
+
+/* الشاشات الصغيرة والهواتف (991px فما دون) */
+@media (max-width: 991px) {
+  header {
+    height: 80px;
+  }
+
+  .menu-btn {
+    display: flex;
+  }
+
+  nav {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 80px);
+    background: #0d1117;
+    padding: 40px 25px;
+    transition: right 0.4s ease-in-out;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+  }
+
+  nav.active {
+    right: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .header-buttons .main-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* الشاشات الصغيرة جداً (480px فما دون) */
+@media (max-width: 480px) {
+  .logo-text {
+    display: none; /* إخفاء النص الهامشي على الهواتف الضيقة لترك مساحة كافية للزر واللوجو */
+  }
+  
+  .logo img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .header-buttons .main-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
 /*==============================
 Hero
 ==============================*/
