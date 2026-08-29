@@ -20,6 +20,15 @@ scroll-behavior:smooth;
 --radius:22px;
 --transition:.35s ease;
 }
+/* منع التمرير الأفقي والخروج عن حدود الشاشة */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden !important;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 body{
 font-family:"Cairo",sans-serif;
 background:var(--bg);
@@ -155,23 +164,25 @@ transition:.08s;
 Header Responsive Styling
 ==============================*/
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90px;
-  z-index: 999;
-  background: #111316;
-  display: flex;
-  align-items: center;
-  transition: background 0.4s ease, height 0.3s ease, box-shadow 0.4s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 999;
+    background: #111316;
+    display: flex;
+    align-items: center;
 }
 
-header.active {
-  background: rgba(8, 12, 20, 0.95);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+header .container {
+    width: 100%;
+    max-width: 1320px;
+    padding: 0 15px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 header .container {
@@ -185,18 +196,24 @@ header .container {
 
 /* Logo */
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-direction: row-reverse;
-  text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row-reverse;
+    text-decoration: none;
 }
 
 .logo img {
-  width: 65px;
-  height: 65px;
-  object-fit: contain;
-  flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.logo-text span {
+    font-size: 15px;
+    font-weight: 900;
+    color: #fff;
+    white-space: nowrap;
 }
 
 .logo-text {
@@ -205,13 +222,6 @@ header .container {
   align-items: flex-end;
   line-height: 1.1;
   text-align: right;
-}
-
-.logo-text span {
-  font-size: 18px;
-  font-weight: 900;
-  color: #fff;
-  white-space: nowrap;
 }
 
 /* Navigation Links */
@@ -251,29 +261,27 @@ nav ul li.active a::after {
 
 /* Header Action Buttons */
 .header-buttons {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .header-buttons .main-btn {
-  padding: 12px 30px;
-  font-size: 15px;
-  white-space: nowrap;
+    padding: 8px 18px;
+    font-size: 13px;
+    white-space: nowrap;
 }
-
 .menu-btn {
-  display: none;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-  width: 45px;
-  height: 45px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  transition: background 0.3s ease;
+    display: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .menu-btn:hover {
@@ -304,45 +312,43 @@ Responsive Breakpoints
   }
 }
 
-/* الشاشات الصغيرة والهواتف (991px فما دون) */
+/*==============================
+Fix Mobile View & Overflow
+==============================*/
 @media (max-width: 991px) {
-  header {
-    height: 80px;
-  }
+    .menu-btn {
+        display: flex;
+    }
 
-  .menu-btn {
-    display: flex;
-  }
-
-  nav {
-    position: fixed;
-    top: 80px;
-    right: -100%;
-    width: 280px;
-    height: calc(100vh - 80px);
-    background: #0d1117;
-    padding: 40px 25px;
-    transition: right 0.4s ease-in-out;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-  }
-
+    /* إخفاء القائمة الرئيسية وتحويلها إلى قائمة جانبيّة للموبايل */
+    nav {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        width: 260px;
+        height: calc(100vh - 80px);
+        background: #0e121a;
+        padding: 30px 20px;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
   nav.active {
-    right: 0;
-  }
+        right: 0;
+    }
 
-  nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
-  }
+nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
 
   nav ul li {
     width: 100%;
   }
 
   nav ul li a {
-    font-size: 16px;
+font-size: 16px;
     display: block;
     width: 100%;
     padding-bottom: 8px;
@@ -406,27 +412,31 @@ filter:blur(40px);
 }
 
 
-.hero-container{
-display:grid;
-grid-template-columns:48% 52%;
-align-items:center;
-min-height:100vh;
-}
-
+.hero-container {
+        grid-template-columns: 1fr !important;
+        padding-top: 100px;
+        text-align: center;
+    }
 .hero-content {
-    color: #ffffff;
-    z-index: 2;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding-left: 30px;
-}
+        padding: 0 15px !important;
+        align-items: center;
+    }
 
-.hero-content p{
-color:#d9d9d9;
-}
+.hero-content h1 {
+        font-size: 32px !important;
+        line-height: 1.3;
+    }
+
+    .hero-content p {
+        font-size: 15px !important;
+        max-width: 100%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
 .hero-content{
 display:flex;
@@ -436,32 +446,25 @@ height:100%;
 padding-right:30px;
 }
 
-.hero-image img{
-width:900px;
-max-width:none;
-object-fit:contain;
-transform:translate(-70px,-20px); /* يسار 70px وفوك 20px */
+/* ضبط صورة الشاحنة لتتحجم مع الشاشة دون خروج */
+    .hero-image {
+        width: 100%;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .hero-image img {
+        width: 100% !important;
+        max-width: 100% !important;
+        transform: none !important; /* إلغاء التزييح (translate) الذي كان يسبب خروج الصورة */
+        height: auto;
+    }
 }
 
-.hero-content h1 {
-    font-size: 64px; /* تصغير الحجم قليلاً ليتناسق */
-    line-height: 1.3;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 20px;
-}
-
-.hero-content h1 span {
-    display: block;
-    color: #f26b21; /* اللون البرتقالي المعتمد */
-}
-
-.hero-content p {
-    font-size: 20px;
-    color: #e0e0e0;
-    max-width: 550px;
-    margin-bottom: 40px;
-    font-weight: 400;
+@media (max-width: 480px) {
+    .logo-text {
+        display: none; /* إخفاء نص اللوجو على الشاشات الصغيرة جداً لتوفير المساحة */
+    }
 }
 .hero-buttons {
     display: flex;
